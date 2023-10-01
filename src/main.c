@@ -34,7 +34,7 @@ cent_declare_types(
 int main() {
     cent_init();
 
-    Entity* e = cent_create_entity(struct player);
+    uint32_t id = cent_create_entity(struct player);
 
     cent_step();
     cent_quit();

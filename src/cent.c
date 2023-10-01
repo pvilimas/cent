@@ -26,9 +26,9 @@ void cent_panic(const char* error)
 uint32_t cent_uid()
 {
     uint32_t uid = 1; // skip 0
-    while (!cent.entities[uid].is_alive) {
+    while (!cent.entities[uid].alive) {
         uid++;
-        if (uid >= CENT_MAX_LEN) {
+        if (uid >= CENT_SIZE) {
             cent_panic("out of memory, exiting");
         }
     }
@@ -43,5 +43,6 @@ uint32_t cent_create_entity_f(const char* typename, size_t size)
         .alive = true,
         .type = typename,
         .data = malloc(size)
-    }
+    };
+    return id;
 }

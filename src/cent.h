@@ -33,8 +33,8 @@ typedef struct {
 } Entity;
 
 typedef struct {
-    EntityType types[CENT_MAX_LEN];
-    Entity entities[CENT_MAX_LEN]; // 0 = null entity
+    EntityType types[CENT_SIZE];
+    Entity entities[CENT_SIZE]; // 0 = null entity
 } Cent;
 extern Cent cent;
 
@@ -45,7 +45,11 @@ extern Cent cent;
     }
 
 #define type(t, render, update) \
-    { #t, render, update }
+    (EntityType) {              \
+        .name = #t,             \
+        .render = render,       \
+        .update = update        \
+    }
 
 #define cent_create_entity(t) \
     cent_create_entity_f(#t, sizeof(t))
